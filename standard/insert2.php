@@ -14,7 +14,6 @@
 <body onload="hiddenn('0')">
 
     <form action="standard/insert_sql2.php" method="POST" enctype="multipart/form-data">
-       
         <section class="about section-bg">
             <div class="container" data-aos="fade-up">
                 <div class="row">

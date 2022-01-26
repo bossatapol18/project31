@@ -11,7 +11,7 @@
     <title></title>
 </head>
 
-<body>
+<body onload="hiddenn('0')">
 
     <form action="standard/insert_sql2.php" method="POST" enctype="multipart/form-data">
        
@@ -30,35 +30,41 @@
                 </div>
 
                 <div class="container">
-
-                    <input type="hidden" name="mode" value="insert_data">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card mt-4">
+                <div class="col-md-12">
+                            <div class="card mt-12">
                                 <div class="card-body">
-                                    <div class="">
-                                        <div class="form-group mb-2">
-                                            <label for="">วาระจากที่ประชุม สมอ. </label>
-                                            <input type="text" name="standard_meet" class="form-control" required>
-                                        </div>
+
+                                    <div class="col-md-4">
+                                        <input type="radio" onclick="hiddenn('1')" name="standard_source" value="1"> จากการประชุม<br /><br>
+                                        <lable id="a11">วาระจากที่ประชุม สมอ.</lable>
+                                        <input value="" type="text" name="standard_meet" id="a1" class="form-control"> <br>
+                                        <lable id="a22">วันที่ประชุม สมอ.</lable>
+                                        <input type="text" name="standard_survey" id="a2" class="form-control"> <br>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+
+                                    <div class="col-md-4">
+                                        <input type="radio" name="standard_source" onclick="hiddenn('2')" value="2"> จดหมายสอบถามจากสมอ.<br /><br>
+                                        <lable id="a33">วันที่รับหนังสือจากสมอ.</lable>
+                                        <input type="text" name="standard_pick" id="a3" class="form-control"> <br>
+                                        <lable id="a44">วันที่ส่งเอกสารออกไป สมอ.</lable>
+                                        <input type="text" name="standard_pickup" id="a4" class="form-control"> <br>
+                                    </div>
+
+                                    <div class="col-md-4">
 
 
-                        <div class="col-md-4">
-                            <div class="card mt-4">
-                                <div class="card-body">
-                                    <div class="">
                                         <div class="form-group mb-2 f-red">
                                             <label for="">เลขที่ มอก.*</label>
                                             <input type="text" name="standard_number" class="form-control" required>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    <input type="hidden" name="mode" value="insert_data">
+                    <div class="row">
+
 
                         <div class="col-md-4">
                             <div class="card mt-4">
@@ -74,47 +80,52 @@
                         </div>
 
                         <div class="col-md-4">
-                            <div class="card mt-4">
-                                <div class="card-body">
-                                    <div class="">
-                                        <div class="form-group mb-2">
-                                            <div class="form-group mb-2">
-                                                <label for="">มาตรฐานบังคับ</label>
-                                                <input type="text" name="standard_mandatory" class="form-control"
-                                                    required>
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <div class="">
+                                    <label for="">ประเภทมาตรฐาน</label>
+                                    <a href="javascript:void(0)" onclick="add_element('main_7','sub_main_7');" class=" float-end btn btn-success">เพิ่ม</a>
+                                    <div class="main-form1 mt-3 " id="main_7">
+                                        <select class="form-control" name="manda_id[]" id="manda_id" style="height: unset !important;">
+                                            <option selected disabled>กรุณาเลือกประเภทมาตรฐาน</option>
+                                            <?php
+                                            $sql = "SELECT * FROM manda_tb";
+                                            $query = sqlsrv_query($conn, $sql);
+                                            while ($result = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)) { ?>
+                                                <option value="<?php echo $result['manda_id'];  ?>">
+                                                    <?php echo $result['manda_name'];  ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <div style="display: none;">
+                                            <div class="row" id="sub_main_7">
+
+                                                <div class="">
+                                                    <div class="form-group mb-2 input-group mt-2">
+
+                                                        <select class="form-control" name="manda_id[]" id="manda_id" style="height: unset !important;">
+                                                            <option selected disabled>กรุณาเลือกกลุ่มผลิตภัณฑ์
+                                                            </option>
+                                                            <?php
+                                                            $sql = "SELECT * FROM manda_tb";
+                                                            $query = sqlsrv_query($conn, $sql);
+                                                            while ($result = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)) { ?>
+                                                                <option value="<?php echo $result['manda_id'];  ?>">
+                                                                    <?php echo $result['manda_name'];  ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                        <button type="button" onclick="$(this).parent().remove();" class="remove-btn btn btn-danger ">ลบ</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-
-                        <div class="col-md-4">
-                            <div class="card mt-4">
-                                <div class="card-body">
-                                    <div class="">
-                                        <div class="form-group mb-2">
-                                            <label for="">หมายเลข tracking</label>
-                                            <input type="text" name="standard_tacking" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="card mt-4">
-                                <div class="card-body">
-                                    <div class="">
-                                        <div class="form-group mb-2">
-                                            <label for="">หมายเหตุ</label>
-                                            <input type="text" name="standard_note" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- หลายฟอร์ม -->
                         <div class="col-md-4">
@@ -258,59 +269,9 @@
                         <!--  -->
 
                         <!-- หลายฟอร์ม -->
-                        <div class="col-md-6">
-                            <div class="card mt-4">
-                                <div class="card-body">
-                                    <div class="">
-                                        <label for="">ประเภทผลิตภัณฑ์</label>
-                                        <a href="javascript:void(0)" onclick="add_element('main2','sub_main2');"
-                                            class="float-end btn btn-success">เพิ่ม</a>
-                                        <div class="main-form2 mt-3" id="main2">
-                                            <select class="form-control" name="type_id[]" id="type_id"
-                                                style="height: unset !important;">
-                                                <option selected disabled>กรุณาเลือกประเภทผลิตภัณฑ์</option>
-                                                <?php
-                                                $sql3 = "SELECT * FROM type_tb";
-                                                $query3 = sqlsrv_query($conn, $sql3);
-                                                while ($result = sqlsrv_fetch_array($query3, SQLSRV_FETCH_ASSOC)) { ?>
-                                                <option value="<?php echo $result['type_id'];  ?>">
-                                                    <?php echo $result['type_name'];  ?></option>
-                                                <?php } ?>
-                                            </select>
-                                            <div style="display: none;">
-                                                <div class="row" id="sub_main2">
-                                                    <div class="">
-                                                        <div class="form-group mb-2 input-group mt-2">
-
-                                                            <select class="form-control" name="type_id[]" id="type_id"
-                                                                style="height: unset !important;">
-                                                                <option selected disabled>กรุณาเลือกประเภทผลิตภัณฑ์
-                                                                </option>
-                                                                <?php
-                                                                $sql3 = "SELECT * FROM type_tb";
-                                                                $query3 = sqlsrv_query($conn, $sql3);
-                                                                while ($result = sqlsrv_fetch_array($query3, SQLSRV_FETCH_ASSOC)) { ?>
-                                                                <option value="<?php echo $result['type_id'];  ?>">
-                                                                    <?php echo $result['type_name'];  ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                            <button type="button" onclick="$(this).parent().remove();"
-                                                                class="remove-btn btn btn-danger ">ลบ</button>
-                                                        </div>  
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
+                      
+                    
+                        <div class="col-md-4">
                             <div class="card mt-4">
                                 <div class="card-body">
                                     <div class="">
@@ -382,3 +343,5 @@
 </body>
 
 </html>
+
+<?php require 'radio.php'; ?>

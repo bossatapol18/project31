@@ -145,17 +145,18 @@ $query2 = sqlsrv_query($conn , $sql2);
                 <table class="table table-hover table-responsive-xl  text-center pt-5"
                     style="background-color: white;" id="tableall">
                     <thead>
+                    
                         <tr>
-                            <th class="col-1 text-center">ลำดับที่</th>
-                            <th class="col-1 text-center">วันที่เพิ่มเอกสาร</th>
-                            <th class="col-2 text-center">วาระจากในที่ประชุมสมอ.</th>
-                            <th class="col-1 text-center">เลขที่มอก.</th>
-                            <th class="col-1 text-center">ชื่อมาตรฐาน</th>
-                            <th class="col-2 text-center">วันที่แต่งตั้งสถานะ</th>
-                            <!-- <th class="col-1">เลขที่เอกสาร</th> -->
-                            <th class="col-2 text-center">สถานะ</th>
-                            <th class="col-1 text-center">ไฟล์แนบ</th>
-                            <th class="col-2 text-center">เมนูจัดการ</th>
+                        <th class="">ลำดับที่</th>
+                                <th class="col-2">วันที่เพิ่มเอกสาร</th>
+                   
+                                <th class="col-1">วาระจากในที่ประชุมสมอ.</th>
+                                <th class="col-2">วันที่ประชุม สมอ.</th>
+                                <th class="col-1">เลขที่มอก.</th>
+                                <th class="col-2">วันที่แต่งตั้งสถานะ</th>
+                                <th class="col-1">สถานะ</th>
+                                <th class="col-1">ไฟล์แนบ</th>
+                                <th class="col-2">เมนูจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -164,9 +165,15 @@ $query2 = sqlsrv_query($conn , $sql2);
                         <tr class="text-center">
                             <td class="align-middle"><?= $i++ ?></td>
                             <td class="align-middle"><?= dateThai($data['standard_create'])  ?></td>
+                            <?php if($data['standard_source'] == '1') : ?>
                             <td class="align-middle"><?= $data['standard_meet'] ?></td>
+                            <td class="align-middle"><?= dateThai($data['standard_survey']) ?></td>
+                            <?php endif ; ?>
+                            <?php if($data['standard_source'] == '2') : ?>
+                                <td class="align-middle"><?= dateThai($data['standard_pick']) ?></td>
+                            <td class="align-middle"><?= dateThai($data['standard_pickup']) ?></td>
+                                <?php endif ; ?>
                             <td class="align-middle"><?= $data['standard_number'] ?></td>
-                            <td class="align-middle"><?= $data['standard_mandatory'] ?></td>
                             <?php if($data['standard_day'] == '') : ?>
                             <td class="align-middle">ยังไม่ได้ระบุสถานะ</td>
                             <?php endif ; ?>
